@@ -55,7 +55,7 @@ xlabel('$x$','Interpreter','latex')
 ylabel('$u$','Interpreter','latex')
 grid on 
 lgnd = legend(p, 'ref','poly','RBF');
-set(lgnd, 'Interpreter','latex', 'FontSize',26, 'color','none', 'Location','best')
+set(lgnd, 'Interpreter','latex', 'FontSize',26, 'color','none', 'Location','northeast')
 
 % Compute the reference solution's mass over time 
 t_aux = mass_RBF(:,1); % list of times 

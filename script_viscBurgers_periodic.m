@@ -10,17 +10,18 @@
 % Date: June 27, 2023
 
 %% Setting up the script 
-clc, clear 
+%clc, clear 
  
 %% Parameters of the problem 
 x_L = 0; x_R = 1; % domain boundaries 
-epsilon = 10^(-2); % diffusion parameter 
+epsilon = 10^(-1); % diffusion parameter 
 T = .1; % end time  
-u_init = @(x) 2*x + (x >= .5).*( - 2 ); % initial data
+u_init = @(x) 1 + 2*x + (x >= .5).*( - 2 ); % initial data
+%u_init = @(x) 1 + sin(2*pi*x);
 
 %% Shared parameters for the SBP-SAT method 
 I = 20; % number of blocks  
-I_ref = 200;
+I_ref = 100;
 d = 2; % degree of the function spaces 
 alpha = 1; % parameter of the exponential function space 
 
@@ -48,6 +49,7 @@ figure(1)
 p = plot( x_eval(:), uu_ref(:),'k:', x_poly(:), u_poly(:),'b--', x_exp(:), u_exp(:),'r-.' ); 
 set(p, 'LineWidth',4)
 set(gca, 'FontSize', 24)  % Increasing ticks fontsize
+%ylim([.1,1.9])
 xlabel('$x$','Interpreter','latex') 
 ylabel('$u$','Interpreter','latex')
 grid on 
@@ -58,9 +60,35 @@ figure(2)
 p = plot( x_eval(:), uu_ref(:),'k:', x_poly(:), u_poly(:),'b--', x_exp(:), u_exp(:),'r-.' ); 
 set(p, 'LineWidth',4)
 set(gca, 'FontSize', 24)  % Increasing ticks fontsize
-xlim([.4,.6])  
+xlim([.5,.7]) 
+%ylim([.1,1.9])
 xlabel('$x$','Interpreter','latex') 
 ylabel('$u$','Interpreter','latex')
 grid on 
 lgnd = legend(p, 'ref','poly','exp');
 set(lgnd, 'Interpreter','latex', 'FontSize',28, 'color','none', 'Location','northeast')
+
+
+%% Plot mass and energy 
+
+% Plot the mass 
+figure(3) 
+p = plot( mass_ref(:,1),mass_ref(:,2)/mass_ref(1,2),'k:', mass_poly(:,1), mass_poly(:,2)/mass_poly(1,2),'b--', mass_exp(:,1), mass_exp(:,2)/mass_exp(1,2),'r-.'); 
+set(p, 'LineWidth',3.5)
+set(gca, 'FontSize', 26)  % Increasing ticks fontsize 
+xlabel('$t$','Interpreter','latex') 
+ylabel('relative mass','Interpreter','latex')
+grid on 
+lgnd = legend(p, 'ref','poly','exp');
+set(lgnd, 'Interpreter','latex', 'FontSize',26, 'color','none', 'Location','best')
+
+% Plot the energy 
+figure(4) 
+p = plot( energy_ref(:,1),energy_ref(:,2)/energy_ref(1,2),'k:', energy_poly(:,1), energy_poly(:,2)/energy_poly(1,2),'b--', energy_exp(:,1), energy_exp(:,2)/energy_exp(1,2),'r-.' ); 
+set(p, 'LineWidth',3.5)
+set(gca, 'FontSize', 26)  % Increasing ticks fontsize 
+xlabel('$t$','Interpreter','latex') 
+ylabel('relative energy','Interpreter','latex')
+grid on 
+lgnd = legend(p, 'ref','poly','exp');
+set(lgnd, 'Interpreter','latex', 'FontSize',26, 'color','none', 'Location','best')

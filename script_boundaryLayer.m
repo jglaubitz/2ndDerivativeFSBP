@@ -25,7 +25,7 @@ u_ref = @(x) ( exp(x/epsilon) - 1 ) / ( exp(.5/epsilon) - 1 ); % reference solut
 %% Shared parameters for the SBP-SAT method  
 I = 20; % number of blocks  
 d = 2; % degree of the function spaces 
-alpha = 1; % parameter of the exponential function space 
+alpha = -.1; % parameter of the exponential function space 
 x_eval = linspace(x_L,x_R,1000); % evaluation points for reference solution
 uu_ref = u_ref(x_eval); % nodal values of the reference solution 
 

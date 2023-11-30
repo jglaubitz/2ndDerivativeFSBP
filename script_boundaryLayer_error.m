@@ -20,7 +20,7 @@ T = .75; % end time
 u_init = @(x) 2*x; % initial data 
 u_ref = @(x) ( exp(x/epsilon) - 1 ) / ( exp(.5/epsilon) - 1 ); % reference solution 
 d = 2; % degree of the function space 
-alpha = .1; % parameter of the exponential function space 
+alpha = -.2; % parameter of the exponential function space 
 
 %% Compute the FSBP operators 
 

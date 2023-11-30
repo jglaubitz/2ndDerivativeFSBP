@@ -36,7 +36,7 @@ function [ x, w] = compute_LSQF( x_L, x_R, span, m, points )
         %% Compute the LS weights 
         w = lsqminnorm(G,m); % indirect computation using optimization tools 
         w_min = min(w); % their smallest value 
-        exactness_error = norm( G*w - m )^2/L; 
+        exactness_error = norm( G*w - m ); 
         
         N = N+1; % increase the number of data points
     
